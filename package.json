@@ -1,14 +1,21 @@
 {
-  "name": "@navid-kianfar/n8n-nodes-opskit",
-  "version": "0.1.0",
+  "name": "n8n-nodes-opskit",
+  "version": "0.1.1",
   "description": "Ops primitives for n8n: rate limits, semaphores, circuit breaker, idempotency, retries, DLQ & replayer.",
   "author": "Navid Kianfar",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "publishConfig": { "access": "public" },
-  "keywords": ["n8n-community-node-package"],
-  "repository": { "type": "git", "url": "https://github.com/navid-kianfar/OpsKit.git" },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navid-kianfar/OpsKit.git"
+  },
   "n8n": {
     "n8nNodesApiVersion": 1,
     "nodes": [
@@ -28,17 +35,22 @@
     "dist",
     "README.md"
   ],
+  "engines": {
+    "node": ">=18.17 <22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -w",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings=0",
     "prepublishOnly": "pnpm build",
-    "publish": "npm publish --access public"
+    "publishPkg": "npm publish --access public"
+  },
+  "dependencies": {
+    "redis": "^5.8.2"
   },
   "peerDependencies": {
     "n8n-core": "^1.0.0",
-    "n8n-workflow": "^1.0.0",
-    "redis": "^5.8.2"
+    "n8n-workflow": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
