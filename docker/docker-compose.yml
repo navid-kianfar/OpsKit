@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports: ["6379:6379"]
+  n8n:
+    image: n8nio/n8n:latest
+    environment:
+      - N8N_METRICS=true
+      - NODE_FUNCTION_ALLOW_EXTERNAL=redis
+    volumes:
+      - ./../packages/n8n-nodes-opskit:/home/node/.n8n/custom/@kalagh/n8n-nodes-opskit
+    ports: ["5678:5678"]
+    depends_on: [redis]
