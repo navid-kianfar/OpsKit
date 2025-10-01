@@ -1,8 +1,9 @@
-import { RedisClientType } from 'redis';
+import type Redis from 'ioredis';
 
-export async function loadScript(client: RedisClientType, script: string) {
-  const sha = await client.scriptLoad(script);
-  return (keys: string[], args: string[]) => client.evalSha(sha, { keys, arguments: args });
+export async function loadScript(client: Redis, script: string) {
+    const sha = await client.script('LOAD', script);
+    return (keys: string[], args: string[]) =>
+        client.evalsha(sha as never, keys.length, ...keys, ...args);
 }
 
 // Token bucket (atomic)

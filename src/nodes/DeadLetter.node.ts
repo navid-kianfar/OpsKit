@@ -28,9 +28,9 @@ export class DeadLetterNode implements INodeType {
 
     for (const it of items) {
       const payload = JSON.stringify({ ts: Date.now(), item: it.json });
-      await client.lPush(key, payload);
+      await client.lpush(key, payload);
     }
-    await client.lTrim(key, 0, maxItems - 1);
+    await client.ltrim(key, 0, maxItems - 1);
 
     await client.quit().catch(() => {});
     return [items];

@@ -28,7 +28,7 @@ export class DLQReplayerNode implements INodeType {
 
     const out: INodeExecutionData[] = [];
     for (let i = 0; i < batch; i++) {
-      const raw = await client.rPop(key);
+      const raw = await client.rpop(key);
       if (!raw) break;
       const obj = JSON.parse(raw);
       out.push({ json: obj.item });
